@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 
 import { LatestPost } from "~/app/_components/post";
 import { api, HydrateClient } from "~/trpc/server";
@@ -45,7 +46,9 @@ export default async function Home() {
             </p>
           </div>
 
-          <LatestPost />
+          <Suspense fallback={<div>Loading yet...</div>}>
+            <LatestPost />
+          </Suspense>
         </div>
       </main>
     </HydrateClient>

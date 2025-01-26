@@ -1,10 +1,12 @@
 import React from "react";
 import { createPost } from "./action";
-import { api } from "~/trpc/server";
+import { api, HydrateClient } from "~/trpc/server";
 import SubmitButton from "~/components/SubmitButton";
 import Post from "./_components/Post";
 
 const PostPage = async () => {
+  void api.postCustom.getData.prefetch();
+
   return (
     <div className="relative px-4 py-12">
       <h1 className="text-center text-4xl font-semibold tracking-wide">
@@ -49,7 +51,9 @@ const PostPage = async () => {
           </h1>
         ))}
       </div> */}
-      <Post />
+      <HydrateClient>
+        <Post />
+      </HydrateClient>
     </div>
   );
 };
